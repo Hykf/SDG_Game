@@ -1,3 +1,0 @@
-E:/CLionProjects/SGD_Game/cmake-build-debug/CMakeFiles/SGD_Game.dir
-E:/CLionProjects/SGD_Game/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/CLionProjects/SGD_Game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
