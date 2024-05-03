@@ -19,9 +19,15 @@ public:
     int width;
     int height;
 
+
+    std::vector<GameObject*> farBackground;
+    std::vector<GameObject*> nearBackground;
+    std::vector<GameObject*> levelDesign;
     std::vector<GameObject*> gameObjects;
+    std::vector<GameObject*> foreGround;
+    std::vector<GameObject*> UI;
 
-
+    void Render(std::vector<GameObject*> objToRender);
     void RenderAll();
 };
 

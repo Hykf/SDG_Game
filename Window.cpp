@@ -21,15 +21,27 @@ Window::~Window() {
 
 }
 
+
 void Window::RenderAll() {
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    for(auto go : gameObjects){
+    Render(farBackground);
+    Render(nearBackground);
+    Render(levelDesign);
+    Render(gameObjects);
+    Render(foreGround);
+    Render(UI);
+
+    SDL_RenderPresent(renderer);
+}
+
+void Window::Render(std::vector<GameObject *> objToRender) {
+
+    for(auto go : objToRender){
         go->Render(*this);
     }
 
-    SDL_RenderPresent(renderer);
 }
 

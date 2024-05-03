@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "UI.h"
 #include  <SDL.h>
 
 class Player : public GameObject{
@@ -20,10 +21,14 @@ public:
     float maxSpeed = 10.0f;
     int counter = 0;
 
+    UI* healthbarBackground = nullptr;
+    UI* healthbarForeground = nullptr;
+
 
     virtual void Render(Window& renderer) override;
     void Movement(const Uint8* state);
     void HandleMouseClick(SDL_Event &event);
+    void ChangeHealth(int change);
 };
 
 

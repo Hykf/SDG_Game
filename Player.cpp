@@ -1,3 +1,4 @@
+
 #include "Player.h"
 #include "Window.h"
 #include <algorithm>
@@ -5,9 +6,16 @@
 #include <iostream>
 #include "Tile.h"
 
+
 Player::Player(Window *_window) {
     window = _window;
     window->gameObjects.push_back(this);
+
+    healthbarBackground = new UI(window,10,950);
+    healthbarBackground->ChangeColor(250,0,0,255);
+    healthbarForeground = new UI(window,healthbarBackground->positionX,healthbarBackground->positionY);
+    healthbarForeground->ChangeColor(10,250,25,255);
+
 }
 
 Player::~Player() {
@@ -27,6 +35,7 @@ void Player::Render(Window &renderer) {
         std::cout<<"V_X: "<< velocityX <<" V_Y: " << velocityY <<std::endl;
     }
     counter++;
+
 
 }
 
@@ -76,8 +85,16 @@ void Player::HandleMouseClick(SDL_Event &event) {
 
         Tile* tile = new Tile(window,mouseX,mouseY);
 
+        ChangeHealth(10);
+
         /// ZAMIENIC NA CREATE GAMEOBJECT (JAKAS KLASA POCHODNA FLOOR LUB TILE) I tam w konstruktorze niech to
         /// Doda sie do gameObjecs
     }
+}
+
+void Player::ChangeHealth(int change) {
+
+    healthbarForeground->sizeX -= std::clamp(float(healthbarBackground->sizeX)/change,0.0f,float(healthbarBackground->sizeX));
+
 }
 

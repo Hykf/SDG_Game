@@ -19,7 +19,11 @@ add_executable(SGD_Game main.cpp
         GameObject.cpp
         GameObject.h
         Tile.cpp
-        Tile.h)
+        Tile.h
+        LevelDesign.cpp
+        LevelDesign.h
+        UI.cpp
+        UI.h)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2main.lib )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2test.lib)

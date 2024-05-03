@@ -1,19 +1,8 @@
-#include "GameObject.h"
+#include "LevelDesign.h"
 
-class Tile : public GameObject {
+class Tile : public LevelDesign {
+
 public:
-
-    Tile(Window* _window,int posX,int posY);
-    ~Tile();
-
-    float positionX = 250;
-    float positionY = 250;
-
-    int sizeX = 50;
-    int sizeY = 50;
-
-
-    virtual void Render(Window& renderer) override;
-
+    Tile(Window* _window,int posX,int posY) : LevelDesign(_window, posX, posY) {}
 };
 
