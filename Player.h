@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "UI.h"
 #include  <SDL.h>
+#include "BoundingBox.h"
 
 class Player : public GameObject{
 public:
@@ -10,16 +11,28 @@ public:
     Player(Window* _window);
     ~Player();
 
+    //
+    //Kiedys moze warto pomyslec nad
+    // stworzeniem struktur do trzymania zmiennych
+    //
+
+
     float positionX = 100;
     float positionY = 100;
     float velocityX;
     float velocityY;
     int sizeX = 20;
     int sizeY = 20;
-    float acceleration = 0.5f;
+    float acceleration = 0.2f;
     float deceleration = 0.6f;
-    float maxSpeed = 10.0f;
+    float maxSpeed = 5.0f;
     int counter = 0;
+    int collisionDirection = -1;
+    int isOnGround = 1;
+    int jumpSpeed = 25;
+    double gravity = 1;
+
+    BoundingBox* boxCollision;
 
     UI* healthbarBackground = nullptr;
     UI* healthbarForeground = nullptr;
@@ -29,6 +42,9 @@ public:
     void Movement(const Uint8* state);
     void HandleMouseClick(SDL_Event &event);
     void ChangeHealth(int change);
+    void Update();
+    bool CheckForCollision();
+    void CheckOnGround();
 };
 
 

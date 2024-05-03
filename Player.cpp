@@ -16,6 +16,8 @@ Player::Player(Window *_window) {
     healthbarForeground = new UI(window,healthbarBackground->positionX,healthbarBackground->positionY);
     healthbarForeground->ChangeColor(10,250,25,255);
 
+    boxCollision = new BoundingBox(positionX,positionY,sizeX,sizeY);
+    boxCollision->debugShow = 1;
 }
 
 Player::~Player() {
@@ -23,26 +25,46 @@ Player::~Player() {
 }
 
 void Player::Render(Window &renderer) {
+
+
+
     SDL_Rect square = { static_cast<int>(positionX), static_cast<int>(positionY), sizeX, sizeY };
     SDL_SetRenderDrawColor(renderer.renderer, 240, 0, 0, 255);
     SDL_RenderFillRect(renderer.renderer, &square);
 
-    const Uint8* state = SDL_GetKeyboardState(NULL);
-    Movement(state);
-
-    if(counter%10==0){
-        std::cout<<"X: "<< positionX <<" Y: " << positionY <<std::endl;
-        std::cout<<"V_X: "<< velocityX <<" V_Y: " << velocityY <<std::endl;
-    }
-    counter++;
-
-
+    Update();
 }
 
 void Player::Movement(const Uint8 *state) {
 
-    if (state[SDL_SCANCODE_W]) {
-        velocityY -= acceleration;
+    switch (collisionDirection) {
+        case 0: // Kolizja z góry
+            if (state[SDL_SCANCODE_W]) {
+
+            }
+            break;
+        case 1: // Kolizja z prawej
+            if (state[SDL_SCANCODE_D]) {
+                velocityX = 0;  return;
+            }
+            break;
+        case 2: // Kolizja z dołu
+            if (state[SDL_SCANCODE_S]) {
+                velocityY = 0;  return;
+            }
+            break;
+        case 3: // Kolizja z lewej
+            if (state[SDL_SCANCODE_A]) {
+                velocityX = 0; return;
+            }
+            break;
+
+        default:
+            break;
+    }
+
+    if (state[SDL_SCANCODE_W] && isOnGround) {
+        velocityY = -jumpSpeed;
     }
     if (state[SDL_SCANCODE_S]) {
         velocityY += acceleration;
@@ -54,8 +76,12 @@ void Player::Movement(const Uint8 *state) {
         velocityX += acceleration;
     }
 
+    if (!isOnGround) {
+        velocityY += gravity;
+    }
+
     velocityX = std::clamp(velocityX, -maxSpeed, maxSpeed);
-    velocityY = std::clamp(velocityY, -maxSpeed, maxSpeed);
+    velocityY = std::clamp(velocityY,float (-jumpSpeed), maxSpeed/2);
 
     positionX += velocityX;
     positionY += velocityY;
@@ -98,3 +124,77 @@ void Player::ChangeHealth(int change) {
 
 }
 
+void Player::Update() {
+
+    bool isCollision = CheckForCollision();
+    CheckOnGround();
+
+    //0 gora
+    //1 prawo
+    //2 dol
+    //3 lewo
+    //-1 ERROR
+
+    if(isCollision){
+        std::cout<<"KOLIZJA: " << collisionDirection << " ;\n";
+
+    }
+
+    const Uint8* state = SDL_GetKeyboardState(NULL);
+
+    Movement(state);
+
+    boxCollision->drawBoundingBox(window->renderer);
+    boxCollision->Move(positionX,positionY);
+
+    if(counter%10==0){
+        std::cout<<"X: "<< positionX <<" Y: " << positionY <<std::endl;
+        std::cout<<"V_X: "<< velocityX <<" V_Y: " << velocityY <<std::endl;
+    }
+    counter++;
+
+
+}
+
+bool Player::CheckForCollision() {
+
+    for(auto x : window->gameObjects){
+
+        if(x == this) continue;
+
+        auto coll = x->boxCollision;
+
+        if(coll != nullptr)
+            if(boxCollision->CheckCollision(*coll)){
+                collisionDirection = boxCollision->CollisionDirection(*coll);
+                return true;
+            }
+
+    }
+
+    for(auto x : window->levelDesign){
+        auto coll = x->boxCollision;
+
+        if(coll != nullptr)
+            if(boxCollision->CheckCollision(*coll)){
+                collisionDirection = boxCollision->CollisionDirection(*coll);
+                return true;
+            }
+
+   }
+
+    collisionDirection = -1;
+    return false;
+}
+
+void Player::CheckOnGround() {
+
+    isOnGround = (collisionDirection == 2);
+
+    if(isOnGround){
+        gravity = 0;
+    } else{
+        gravity = 3;
+    }
+
+}

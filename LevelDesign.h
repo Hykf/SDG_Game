@@ -1,6 +1,9 @@
+#pragma once
 #include <SDL.h>
+#include "BoundingBox.h"
 #include "Window.h"
 #include "GameObject.h"
+
 
 class LevelDesign : public GameObject {
 
@@ -14,7 +17,6 @@ public:
 
         int sizeX = 50;
         int sizeY = 50;
-
 
         virtual void Render(Window& renderer) override;
 
