@@ -4,6 +4,7 @@
 #define WINDOW_H
 
 #include "SDL.h"
+#include "Player.h"
 #include <vector>
 
 
@@ -17,6 +18,7 @@ public:
 
     SDL_Window *window;
     SDL_Renderer *renderer;
+    Player* player;
     int width;
     int height;
 

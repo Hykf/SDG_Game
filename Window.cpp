@@ -3,6 +3,7 @@
 #include <vector>
 #include "GameObject.h"
 
+
 Window::Window(int width, int height) {
     SDL_Init( SDL_INIT_EVERYTHING );
     width = width;
@@ -10,7 +11,7 @@ Window::Window(int width, int height) {
     if (auto error = SDL_CreateWindowAndRenderer( width, height,SDL_WINDOW_SHOWN, &window, &renderer )) {
         std::cout << "Nie udalo sie utworzyc okienka" << std::endl;
     }
-
+    player = new Player(this);
 }
 
 Window::~Window() {
