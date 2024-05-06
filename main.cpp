@@ -8,22 +8,15 @@ int main( int argc, char* args[] ) {
     using namespace std;
     Window window(1000,1000);
 
-
     bool quit = false;
     SDL_Event event;
     Uint32 lastFrameTime = SDL_GetTicks();
     const Uint32 MS_PER_FRAME = 1000 / 60; // Limit FPS do 60
 
-    //TEST
-
-    for(int i = 0; i != (1000/50);i++){
-        Tile* tile = new Tile(&window,(i*50),800);
-    }
-
-
-    //TEST --END
 
     while (!quit) { //MAIN GAME DRAWING LOOP
+
+
 
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT) {
@@ -45,6 +38,8 @@ int main( int argc, char* args[] ) {
         }
 
         lastFrameTime = SDL_GetTicks();
+
+        window.DeltaTime = ((elapsedTime) / 1000.0f) + 0.001f;
 
     // FRAME MANAGEMENT -- END
 

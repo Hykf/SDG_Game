@@ -7,7 +7,7 @@
 #include "Player.h"
 #include <vector>
 
-
+class Tile;
 class GameObject;
 
 class Window {
@@ -19,8 +19,13 @@ public:
     SDL_Window *window;
     SDL_Renderer *renderer;
     Player* player;
-    int width;
+
+    Tile* tile;//TODO USUN
+
+    int width = 500;
     int height;
+
+    float DeltaTime = 0.4;
 
 
     std::vector<GameObject*> farBackground;

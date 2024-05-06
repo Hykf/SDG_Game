@@ -4,6 +4,7 @@
 #include "UI.h"
 #include  <SDL.h>
 #include "BoundingBox.h"
+#include <vector>
 
 class Player : public GameObject{
 public:
@@ -23,11 +24,11 @@ public:
     float velocityY;
     int sizeX = 20;
     int sizeY = 20;
-    float acceleration = 0.2f;
+    float acceleration = 5.5f;
     float deceleration = 0.6f;
     float maxSpeed = 5.0f;
     int counter = 0;
-    int collisionDirection = -1;
+    std::vector<int> collisionDirection;
     int isOnGround = 1;
     int jumpSpeed = 25;
     double gravity = 1;

@@ -17,12 +17,12 @@ LevelDesign::~LevelDesign() {
 
 void LevelDesign::Render(Window &renderer) {
 
-    SDL_Rect square = { static_cast<int>(positionX) - int(window->player->positionX), static_cast<int>(positionY)- int(window->player->positionY), sizeX, sizeY };
+    SDL_Rect square = { static_cast<int>(positionX) - int(window->player->positionX), static_cast<int>(positionY), sizeX, sizeY };
     SDL_SetRenderDrawColor(renderer.renderer, 0, 255, 125, 255);
     SDL_RenderFillRect(renderer.renderer, &square);
 
 
     boxCollision->debugShow = 1;
     boxCollision->drawBoundingBox(window->renderer);
-    boxCollision->Move(static_cast<int>(positionX) - int(window->player->positionX),static_cast<int>(positionY)- int(window->player->positionY));
+    boxCollision->Move(static_cast<int>(positionX) - int(window->player->positionX),static_cast<int>(positionY));
 }

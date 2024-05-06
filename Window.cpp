@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "GameObject.h"
+#include "Tile.h"
 
 
 Window::Window(int width, int height) {
@@ -12,6 +13,9 @@ Window::Window(int width, int height) {
         std::cout << "Nie udalo sie utworzyc okienka" << std::endl;
     }
     player = new Player(this);
+
+    tile = new Tile(this,50,800,1500,750);
+    tile = new Tile(this,50,800,1500,750);
 }
 
 Window::~Window() {
@@ -21,7 +25,6 @@ Window::~Window() {
     SDL_Quit();
 
 }
-
 
 void Window::RenderAll() {
 
