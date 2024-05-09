@@ -22,9 +22,11 @@ public:
     float positionY = 100;
     float velocityX;
     float velocityY;
+    float accelerationX = 0.5f;
+    float accelerationY = 0.5f;
     int sizeX = 20;
     int sizeY = 20;
-    float acceleration = 5.5f;
+    float acceleration = 50.5f;
     float deceleration = 0.6f;
     float maxSpeed = 5.0f;
     int counter = 0;
@@ -44,7 +46,7 @@ public:
     void HandleMouseClick(SDL_Event &event);
     void ChangeHealth(int change);
     void Update();
-    bool CheckForCollision();
+    bool CheckForCollision(float dx, float dy);
     void CheckOnGround();
 };
 

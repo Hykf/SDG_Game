@@ -13,7 +13,7 @@ public:
 
     BoundingBox(int _x, int _y, int _width, int _height) : x(_x), y(_y), width(_width), height(_height) {}
 
-    bool CheckCollision(const BoundingBox& otherBox) const;
+    bool CheckCollision(const BoundingBox& otherBox, int dx, int dy) const;
     void drawBoundingBox(SDL_Renderer* renderer) const;
     void Move(int nx , int ny);
     int CollisionDirection(const BoundingBox& otherBox);

@@ -14,8 +14,11 @@ Window::Window(int width, int height) {
     }
     player = new Player(this);
 
-    tile = new Tile(this,50,800,1500,750);
-    tile = new Tile(this,50,800,1500,750);
+    tile = new Tile(this,50,800,250,750);
+    tile = new Tile(this,300,800,250,750);
+    tile = new Tile(this,550,800,250,750);
+    tile = new Tile(this,800,800,250,750);
+
 }
 
 Window::~Window() {

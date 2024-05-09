@@ -1,17 +1,16 @@
 #include "BoundingBox.h"
 
-bool BoundingBox::CheckCollision(const BoundingBox &otherBox) const {
-
-    int thisRight = x + width;
+bool BoundingBox::CheckCollision(const BoundingBox &otherBox, int dx, int dy) const {
+    int thisRight = x + width + dx;
     int otherRight = otherBox.x + otherBox.width;
-    int thisBottom = y + height;
+    int thisBottom = y + height + dy;
     int otherBottom = otherBox.y + otherBox.height;
 
-    if (thisRight < otherBox.x || x > otherRight ||
-        thisBottom < otherBox.y || y > otherBottom) {
-        return false; // Brak kolizji
+    if (thisRight < otherBox.x || x + dx > otherRight ||
+        thisBottom < otherBox.y || y + dy > otherBottom) {
+        return false;
     }
-    return true; // Kolizja wykryta
+    return true;
 }
 
 void BoundingBox::drawBoundingBox(SDL_Renderer *renderer) const {

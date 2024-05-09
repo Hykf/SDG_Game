@@ -17,7 +17,7 @@ Player::Player(Window *_window) {
     healthbarForeground->ChangeColor(10,250,25,255);
 
     boxCollision = new BoundingBox(positionX,positionY,sizeX,sizeY);
-    boxCollision->debugShow = 1;
+    boxCollision->debugShow = 0;
 }
 
 Player::~Player() {
@@ -26,12 +26,13 @@ Player::~Player() {
 
 void Player::Render(Window &renderer) {
 
+    Update();
 
     SDL_Rect square = { renderer.width, static_cast<int>(positionY), sizeX, sizeY };
-    SDL_SetRenderDrawColor(renderer.renderer, 240, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer.renderer, 240, 120, 0, 255);
     SDL_RenderFillRect(renderer.renderer, &square);
 
-    Update();
+    //Update();
 }
 
 void Player::Movement(const Uint8 *state) {
@@ -63,10 +64,9 @@ void Player::Movement(const Uint8 *state) {
         }
     }
 
-
-    const float jumpImpulse = 100.0f; // Początkowy impuls skoku
-    const float jumpDuration = 0.5f; // Czas trwania skoku
-    static float jumpTime = 0.0f;
+    const float jumpImpulse = 50.0f;
+    const float jumpDuration = 0.5f;
+    static float jumpTime = 0.1f;
 
         if (state[SDL_SCANCODE_W] && isOnGround) {
             velocityY = -jumpImpulse;
@@ -75,7 +75,7 @@ void Player::Movement(const Uint8 *state) {
 
     if (jumpTime > 0.0f) {
         velocityY += gravity * (1.0f - (jumpTime / jumpDuration));
-        jumpTime -= window->DeltaTime;
+
     } else {
         velocityY += gravity;
     }
@@ -99,7 +99,7 @@ void Player::Movement(const Uint8 *state) {
         }
 
         velocityX = std::clamp(velocityX, -maxSpeed, maxSpeed);
-        velocityY = std::clamp(velocityY, float(-jumpSpeed), maxSpeed);
+        velocityY = std::clamp(velocityY, float(-jumpSpeed), maxSpeed/2);
 
         positionX += velocityX;
         positionY += velocityY;
@@ -144,7 +144,10 @@ void Player::ChangeHealth(int change) {
 
 void Player::Update() {
 
-    bool isCollision = CheckForCollision();
+    boxCollision->drawBoundingBox(window->renderer);
+    boxCollision->Move(500,positionY);
+
+    bool isCollision = CheckForCollision(this->velocityX,velocityY);
     //0 gora
     //1 prawo
     //2 dol
@@ -154,8 +157,6 @@ void Player::Update() {
 
     Movement(state);
 
-    boxCollision->drawBoundingBox(window->renderer);
-    boxCollision->Move(500,positionY);
 
     if(counter%10==0){
 
@@ -168,7 +169,7 @@ void Player::Update() {
     collisionDirection.clear();
 }
 
-bool Player::CheckForCollision() {
+bool Player::CheckForCollision(float dx, float dy) {
 
     bool ret = false;
     for(auto x : window->gameObjects){
@@ -176,7 +177,7 @@ bool Player::CheckForCollision() {
         if(x == this) continue;
         auto coll = x->boxCollision;
         if(coll != nullptr)
-            if(boxCollision->CheckCollision(*coll)){
+            if(boxCollision->CheckCollision(*coll,velocityX,velocityY)){
                 collisionDirection.push_back(boxCollision->CollisionDirection(*coll));
                 ret =  true;
             }
@@ -186,7 +187,7 @@ bool Player::CheckForCollision() {
         auto coll = x->boxCollision;
 
         if(coll != nullptr)
-            if(boxCollision->CheckCollision(*coll)){
+            if(boxCollision->CheckCollision(*coll,velocityX,velocityY)){
                 collisionDirection.push_back(boxCollision->CollisionDirection(*coll));
                 ret = true;
             }
@@ -203,7 +204,7 @@ void Player::CheckOnGround() {
     if(isOnGround){
         gravity = 0;
     } else{
-        gravity = 4; //Im wieksze to tym nizej da rade skoczyc
+        gravity = 10; //Im wieksze to tym nizej da rade skoczyc
     }
 
 }
