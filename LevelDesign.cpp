@@ -22,7 +22,7 @@ void LevelDesign::Render(Window &renderer) {
     SDL_RenderFillRect(renderer.renderer, &square);
 
 
-    boxCollision->debugShow = 1;
+    boxCollision->debugShow = 0;
     boxCollision->drawBoundingBox(window->renderer);
     boxCollision->Move(static_cast<int>(positionX) - int(window->player->positionX),static_cast<int>(positionY));
 }

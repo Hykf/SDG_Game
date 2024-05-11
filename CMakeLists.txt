@@ -6,9 +6,12 @@ set(CMAKE_CXX_STANDARD 23)
 
 set(SDL2_INCLUDE_DIR "E:/C++_Libs/SDL2-2.30.1/include")
 set(SDL2_LIB_DIR "E:/C++_Libs/SDL2-2.30.1/lib/x64")
+set(SDL2IMAGE_LIB_DIR "E:/C++_Libs/SDL2_image")
 
 
 include_directories(${SDL2_INCLUDE_DIR})
+include_directories(${SDL2IMAGE_LIB_DIR})
+
 add_executable(SGD_Game main.cpp
         Window.cpp
         Window.h
@@ -26,9 +29,13 @@ add_executable(SGD_Game main.cpp
         UI.h
         BoundingBox.cpp
         BoundingBox.h)
+
+file(COPY "E:/C++_Libs/SDL2_image/lib/SDL2_image.dll" DESTINATION ${CMAKE_BINARY_DIR})
+
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2main.lib )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2test.lib)
+target_link_libraries(${PROJECT_NAME} "E:/C++_Libs/SDL2_image/lib/SDL2_image.dll")
 
 
 message("message: ${SDL2_LIB_DIR}/SDL2main.lib ")

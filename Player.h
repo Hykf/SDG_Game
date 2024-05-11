@@ -25,7 +25,7 @@ public:
     float accelerationX = 0.5f;
     float accelerationY = 0.5f;
     int sizeX = 20;
-    int sizeY = 20;
+    int sizeY = 35;
     float acceleration = 50.5f;
     float deceleration = 0.6f;
     float maxSpeed = 5.0f;
@@ -35,11 +35,18 @@ public:
     int jumpSpeed = 25;
     double gravity = 1;
 
+    int textureWidth;
+    int textureHeight;
+    bool facingRight = true;
+    int currentStage = 0;
+
     BoundingBox* boxCollision;
 
+    UI* healthbarBlackBackground = nullptr;
     UI* healthbarBackground = nullptr;
     UI* healthbarForeground = nullptr;
 
+    SDL_Texture* playerTexture = nullptr;
 
     virtual void Render(Window& renderer) override;
     void Movement(const Uint8* state);
@@ -48,6 +55,7 @@ public:
     void Update();
     bool CheckForCollision(float dx, float dy);
     void CheckOnGround();
+    void SetHealthColor();
 };
 
 
