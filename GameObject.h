@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 #include "BoundingBox.h"
 
@@ -16,6 +17,11 @@ public:
 
     Window* window;
     BoundingBox* boxCollision;
+
+
+    SDL_Texture* objectTexture = nullptr;
+    int textureWidth;
+    int textureHeight;
 
     virtual void Render(Window& renderer) = 0;
 };

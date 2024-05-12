@@ -5,6 +5,7 @@
 #include "Tile.h"
 
 
+
 Window::Window(int width, int height) {
     SDL_Init( SDL_INIT_EVERYTHING );
     width = width;
@@ -14,14 +15,13 @@ Window::Window(int width, int height) {
     }
     player = new Player(this);
 
-    tile = new Tile(this,50,800,250,750);
-    tile = new Tile(this,300,800,250,750);
-    tile = new Tile(this,550,800,250,750);
-    tile = new Tile(this,800,800,250,750);
 
+    BuildLevel();
 }
 
 Window::~Window() {
+
+    if(level) delete level;
 
     SDL_DestroyRenderer( renderer );
     SDL_DestroyWindow( window );
@@ -48,6 +48,24 @@ void Window::Render(std::vector<GameObject *> objToRender) {
 
     for(auto go : objToRender){
         go->Render(*this);
+    }
+
+}
+
+void Window::BuildLevel() {
+
+    level = new Level();
+    int blocksize = 150;
+    int innerLoop = 10;
+
+    for(int i = 0; i!= 10 ; i++){
+        level->farBackground = new FarBackground(this,-250 + (i*1500),0);
+        level->nearBackground = new NearBackground(this,-250+ (i*1000),500);
+
+        for(int j = 0; j != innerLoop ; j++){
+            level->levelTile = new Tile(this,0+(((i*innerLoop) + j) * blocksize) ,800,blocksize,blocksize);
+
+        }
     }
 
 }

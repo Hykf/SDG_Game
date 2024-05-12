@@ -28,7 +28,12 @@ add_executable(SGD_Game main.cpp
         UI.cpp
         UI.h
         BoundingBox.cpp
-        BoundingBox.h)
+        BoundingBox.h
+        FarBackground.cpp
+        FarBackground.h
+        NearBackground.cpp
+        NearBackground.h
+)
 
 file(COPY "E:/C++_Libs/SDL2_image/lib/SDL2_image.dll" DESTINATION ${CMAKE_BINARY_DIR})
 

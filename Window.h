@@ -6,6 +6,8 @@
 #include "SDL.h"
 #include <SDL_image.h>
 #include "Player.h"
+#include "FarBackground.h"
+#include "NearBackground.h"
 #include <vector>
 
 class Tile;
@@ -14,6 +16,12 @@ class GameObject;
 class Window {
 public:
 
+    struct Level{
+        FarBackground* farBackground = nullptr;
+        NearBackground* nearBackground = nullptr;
+        Tile* levelTile;
+    };
+
     Window(int width, int height);
     ~Window();
 
@@ -21,10 +29,10 @@ public:
     SDL_Renderer *renderer;
     Player* player;
 
-    Tile* tile;//TODO USUN
+    Level* level = nullptr;
 
-    int width = 500;
-    int height;
+    int width = 1000;
+    int height= 1000;
 
     float DeltaTime = 0.4;
 
@@ -38,6 +46,7 @@ public:
 
     void Render(std::vector<GameObject*> objToRender);
     void RenderAll();
+    void BuildLevel();
 };
 
 #endif // WINDOW_H

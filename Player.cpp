@@ -26,39 +26,29 @@ Player::Player(Window *_window) {
     boxCollision = new BoundingBox(positionX,positionY,sizeX,sizeY);
     boxCollision->debugShow = 0;
 
-    playerTexture = IMG_LoadTexture(window->renderer, "../images/knight.png");
-    SDL_QueryTexture(playerTexture, NULL, NULL, &textureWidth, &textureHeight);
+    objectTexture = IMG_LoadTexture(window->renderer, "../images/knight.png");
+    SDL_QueryTexture(objectTexture, NULL, NULL, &textureWidth, &textureHeight);
 }
 
 Player::~Player() {
     window->gameObjects.erase(std::find(window->gameObjects.begin(),window->gameObjects.end(),this));
-    SDL_DestroyTexture(playerTexture);
+    SDL_DestroyTexture(objectTexture);
 }
 
 void Player::Render(Window &renderer) {
 
     Update();
-
     SDL_Rect square = { renderer.width, static_cast<int>(positionY), sizeX, sizeY };
-    SDL_SetRenderDrawColor(renderer.renderer, 240, 120, 0, 255);
-    SDL_RenderFillRect(renderer.renderer, &square);
-
-    SDL_Rect dstRect = { static_cast<int>(500)-(sizeX/2), static_cast<int>(positionY)-(sizeY/4), textureWidth/6, textureHeight/4 }; // x i y pozycja na ekranie w i h rozmiar
-    SDL_Rect srcRect = { 73, 9, 15, 27 }; // x i y wspolrzedne lewego gornego rogu w i h wspolrzednego prawego dolnego rogu //TODO ANIMACJA
-
-    if (counter % 50 == 0) {
-        currentStage++;
-        currentStage = currentStage % 4;
-        srcRect = { 9 + (currentStage * 36), 9, 15, 27 }; // Poprawiono obliczenia
-        std::cout<<currentStage << std::endl;
-    }
-
-    SDL_RenderCopy(renderer.renderer, playerTexture, &srcRect, &dstRect);
+    //SDL_SetRenderDrawColor(renderer.renderer, 240, 120, 0, 255);
+    //SDL_RenderFillRect(renderer.renderer, &square);
+    RunAnimation(renderer);
 
     //Update();
 }
 
 void Player::Movement(const Uint8 *state) {
+
+    AnimStage tempAnim = IDLE;
 
     bool hasTopCollision = (std::find(collisionDirection.begin(), collisionDirection.end(), 0) != collisionDirection.end());
     bool hasRightCollision = (std::find(collisionDirection.begin(), collisionDirection.end(), 1) != collisionDirection.end());
@@ -109,10 +99,15 @@ void Player::Movement(const Uint8 *state) {
 
     if (!hasLeftCollision && state[SDL_SCANCODE_A]) {
         velocityX -= acceleration;
+        facingRight = false;
+        animStage = RUN;
     } else if (!hasRightCollision && state[SDL_SCANCODE_D]) {
         velocityX += acceleration;
+        facingRight = true;
+        animStage = RUN;
     } else {
         velocityX = 0;
+        animStage = IDLE;
     }
 
         CheckOnGround();
@@ -150,7 +145,13 @@ void Player::HandleMouseClick(SDL_Event &event) {
         int mouseX, mouseY;
         SDL_GetMouseState(&mouseX, &mouseY);
 
-        Tile* tile = new Tile(window,mouseX+positionX,mouseY);
+        if (tile) {
+            delete tile;
+            tile = nullptr;
+        }
+
+        tile = new Tile(window,mouseX+positionX,mouseY);
+        tile->cc = 3;
 
         ChangeHealth(10);
 
@@ -190,6 +191,11 @@ void Player::Update() {
     counter++;
 
     collisionDirection.clear();
+
+    if(positionY > window->height){
+        std::cout<<positionY << " : "<< window->height << " DEATH is COMIING";
+    }
+
 }
 
 bool Player::CheckForCollision(float dx, float dy) {
@@ -227,7 +233,7 @@ void Player::CheckOnGround() {
     if(isOnGround){
         gravity = 0;
     } else{
-        gravity = 5; //Im wieksze to tym nizej da rade skoczyc
+        gravity = 3; //Im wieksze to tym nizej da rade skoczyc
     }
 
 }
@@ -239,7 +245,7 @@ void Player::SetHealthColor() {
     float x = healthbarForeground->sizeX;
     float y = healthbarBackground->sizeX;
     float health = x/y;
-    std::cout<< health << std::endl;
+    //std::cout<< health << std::endl;
 
     if(health > 0.66){
         healthbarForeground->ChangeColor(15,105,10,255);
@@ -251,5 +257,47 @@ void Player::SetHealthColor() {
 
     if(health-0.01f <= 0)
         std::cout<<"DEATH";
+
+}
+
+void Player::RunAnimation(Window &renderer) {
+
+    int startYpos = 9;
+    int animEndFram = 4;
+
+    switch (animStage) {
+        case IDLE:
+            startYpos = 9;
+            animEndFram = 4;
+            break;
+        case RUN:
+            startYpos = 74;
+            animEndFram = 8;
+            break;
+        case GETHIT:
+            break;
+        case DEATH:
+            break;
+        default:
+            break;
+    }
+
+
+    SDL_Rect dstRect = { static_cast<int>(500)-(sizeX/2), static_cast<int>(positionY)-(sizeY), sizeX*2, sizeY*2 }; // x i y pozycja na ekranie w i h rozmiar
+    SDL_Rect srcRect = { 9 + (currentStage * 32), startYpos, 13, 20 }; // x i y wspolrzedne lewego gornego rogu w i h wspolrzednego prawego dolnego rogu //TODO ANIMACJA
+
+    if (counter % 10 == 0) {
+        currentStage++;
+        currentStage = currentStage % animEndFram;
+        std::cout<<facingRight << std::endl;
+    }
+
+    SDL_RendererFlip flip;
+
+    flip = static_cast<SDL_RendererFlip>((facingRight == 0) ? SDL_FLIP_HORIZONTAL : NULL);
+
+    SDL_RenderCopyEx(renderer.renderer, objectTexture, &srcRect, &dstRect,0.0, NULL, flip);
+
+
 
 }
