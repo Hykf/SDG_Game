@@ -6,6 +6,7 @@
 #include <SDL_image.h>
 #include <iostream>
 #include "Tile.h"
+#include "SDL_mixer.h"
 
 
 Player::Player(Window *_window) {
@@ -168,10 +169,13 @@ void Player::ChangeHealth(int change) {
 
 void Player::Update() {
 
+    bool isCollision = CheckForCollision(this->velocityX,velocityY);
+
     boxCollision->drawBoundingBox(window->renderer);
     boxCollision->Move(500,positionY);
 
-    bool isCollision = CheckForCollision(this->velocityX,velocityY);
+
+
     //0 gora
     //1 prawo
     //2 dol
@@ -204,12 +208,36 @@ bool Player::CheckForCollision(float dx, float dy) {
     for(auto x : window->gameObjects){
 
         if(x == this) continue;
+
         auto coll = x->boxCollision;
-        if(coll != nullptr)
+
+        if(coll != nullptr){
+
+
             if(boxCollision->CheckCollision(*coll,velocityX,velocityY)){
-                collisionDirection.push_back(boxCollision->CollisionDirection(*coll));
-                ret =  true;
+                switch(coll->collType){
+
+                    case BoundingBox::BLOCK:
+                        collisionDirection.push_back(boxCollision->CollisionDirection(*coll));
+                        ret =  true;
+
+                        break;
+                    case BoundingBox::DANGER:
+                        ChangeHealth(12);
+                        coll->collType = BoundingBox::NONE;
+                        break;
+
+                    case BoundingBox::COIN:
+                        break;
+                    case BoundingBox::FINISH:
+                        break;
+                    default:
+                        break;
+
+                }
+
             }
+        }
     }
 
     for(auto x : window->levelDesign){

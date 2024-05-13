@@ -28,7 +28,7 @@ public:
     };
 
     float positionX = 100;
-    float positionY = 100;
+    float positionY = 750;
     float velocityX;
     float velocityY;
     float accelerationX = 0.5f;

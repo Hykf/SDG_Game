@@ -9,6 +9,7 @@
 #include "FarBackground.h"
 #include "NearBackground.h"
 #include <vector>
+#include <SDL_mixer.h>
 
 class Tile;
 class GameObject;
@@ -17,9 +18,17 @@ class Window {
 public:
 
     struct Level{
+
+        Level(Window* _window){
+            window = _window;
+        }
+
         FarBackground* farBackground = nullptr;
         NearBackground* nearBackground = nullptr;
+        Window* window = nullptr;
         Tile* levelTile;
+
+        void SpawnArrow(int x, int y);
     };
 
     Window(int width, int height);
@@ -28,11 +37,13 @@ public:
     SDL_Window *window;
     SDL_Renderer *renderer;
     Player* player;
+    Mix_Music *music = nullptr;
 
     Level* level = nullptr;
 
     int width = 1000;
     int height= 1000;
+    uint64_t counter = 0;
 
     float DeltaTime = 0.4;
 

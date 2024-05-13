@@ -18,7 +18,6 @@ public:
     Window* window;
     BoundingBox* boxCollision;
 
-
     SDL_Texture* objectTexture = nullptr;
     int textureWidth;
     int textureHeight;

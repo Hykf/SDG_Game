@@ -10,6 +10,15 @@ public:
     int width, height;
     bool debugShow = 0;
 
+    enum collisionType {
+        NONE,
+        BLOCK,
+        COIN,
+        DANGER,
+        FINISH
+    };
+
+    collisionType collType = BLOCK;
 
     BoundingBox(int _x, int _y, int _width, int _height) : x(_x), y(_y), width(_width), height(_height) {}
 

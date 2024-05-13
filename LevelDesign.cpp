@@ -32,7 +32,7 @@ void LevelDesign::Render(Window &renderer) {
     boxCollision->Move(newPositionX,newPositionY);
 
     SDL_Rect dstRect = { newPositionX, static_cast<int>(positionY), sizeX, sizeY }; // x i y pozycja na ekranie w i h rozmiar
-    SDL_Rect srcRect = { 0 + (cc * 16), 0, 16, 16 };; //
+    SDL_Rect srcRect = { 0 + (8 * 16), 0, 16, 16 };; //
 
 
     if (counter % 50 == 0) {
