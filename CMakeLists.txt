@@ -37,6 +37,8 @@ add_executable(SGD_Game main.cpp
         NearBackground.h
         Arrow.cpp
         Arrow.h
+        Coin.cpp
+        Coin.h
 )
 
 file(COPY "E:/C++_Libs/SDL2_image/lib/SDL2_image.dll" DESTINATION ${CMAKE_BINARY_DIR})

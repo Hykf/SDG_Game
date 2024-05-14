@@ -35,18 +35,6 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 46,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 47,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
 				"line" : 48,
 				"parent" : 0
 			},
@@ -66,6 +54,18 @@
 				"command" : 1,
 				"file" : 0,
 				"line" : 51,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 52,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 53,
 				"parent" : 0
 			},
 			{
@@ -134,7 +134,8 @@
 				15,
 				17,
 				19,
-				21
+				21,
+				23
 			]
 		}
 	],
@@ -212,7 +213,8 @@
 				15,
 				17,
 				19,
-				21
+				21,
+				23
 			]
 		},
 		{
@@ -229,7 +231,8 @@
 				16,
 				18,
 				20,
-				22
+				22,
+				24
 			]
 		}
 	],
@@ -360,6 +363,17 @@
 		{
 			"backtrace" : 1,
 			"path" : "Arrow.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Coin.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Coin.h",
 			"sourceGroupIndex" : 1
 		}
 	],

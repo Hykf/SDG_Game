@@ -18,6 +18,8 @@ public:
     Window* window;
     BoundingBox* boxCollision;
 
+    virtual ~GameObject() = default;
+
     SDL_Texture* objectTexture = nullptr;
     int textureWidth;
     int textureHeight;

@@ -19,8 +19,8 @@ public:
     int sizeY = 30;
     float accX;
     float accY;
-    float dirX;
-    float dirY;
+    float dirX{};
+    float dirY{};
     float speed = 10.5f;
 
 

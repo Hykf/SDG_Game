@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Tile.h"
 #include "SDL_mixer.h"
+#include "Arrow.h"
 
 
 Player::Player(Window *_window) {
@@ -219,15 +220,31 @@ bool Player::CheckForCollision(float dx, float dy) {
                     case BoundingBox::BLOCK:
                         collisionDirection.push_back(boxCollision->CollisionDirection(*coll));
                         ret =  true;
-
                         break;
+
                     case BoundingBox::DANGER:
+
                         ChangeHealth(17);
                         coll->collType = BoundingBox::NONE;
+                        {
+                            auto a = dynamic_cast<Arrow*>(x);
+                            a->sizeX = 0;
+                            a->sizeY = 0;
+
+                        }
                         break;
 
                     case BoundingBox::COIN:
+                        score++;
+                        coll->collType = BoundingBox::NONE;
+                        {
+                            auto a = dynamic_cast<Coin*>(x);
+                            a->sizeX = 0;
+                            a->sizeY = 0;
+
+                        }
                         break;
+
                     case BoundingBox::FINISH:
                         break;
                     default:

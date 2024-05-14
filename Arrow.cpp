@@ -35,8 +35,6 @@ Arrow::Arrow(Window *_window, int _posX, int _posY) {
     objectTexture = IMG_LoadTexture(window->renderer, "../images/arrow.png");
     SDL_QueryTexture(objectTexture, NULL, NULL, &textureWidth, &textureHeight);
 
-
-
 }
 
 void Arrow::Update() {
@@ -78,7 +76,7 @@ void Arrow::Render(Window &renderer) {
 
 
 Arrow::~Arrow() {
-    window->gameObjects.erase(std::find(window->gameObjects.begin(),window->gameObjects.end(),this));
+    window->gameObjects.erase( std::find(window->gameObjects.begin(),window->gameObjects.end(),this));
 
 }
 

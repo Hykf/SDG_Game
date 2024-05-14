@@ -33,6 +33,7 @@ public:
     float velocityY;
     float accelerationX = 0.5f;
     float accelerationY = 0.5f;
+    int score = 0;
     int sizeX = 20;
     int sizeY = 35;
     float acceleration = 50.5f;

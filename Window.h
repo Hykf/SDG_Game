@@ -10,6 +10,7 @@
 #include "NearBackground.h"
 #include <vector>
 #include <SDL_mixer.h>
+#include "Coin.h"
 
 class Tile;
 class GameObject;
@@ -27,6 +28,7 @@ public:
         NearBackground* nearBackground = nullptr;
         Window* window = nullptr;
         Tile* levelTile;
+        Coin* coin =nullptr;
 
         void SpawnArrow();
     };

@@ -6,6 +6,7 @@
 #include "Arrow.h"
 #include <random>
 #include <SDL_mixer.h>
+#include "Coin.h"
 
 Window::Window(int width, int height) {
     SDL_Init( SDL_INIT_EVERYTHING );
@@ -59,7 +60,7 @@ void Window::RenderAll() {
 
     SDL_RenderPresent(renderer);
 
-        if(counter%(75-int(player->positionX/350))==0)
+        if(counter%(65-int(player->positionX/350))==0)
             level->SpawnArrow();
         counter++;
 
@@ -110,12 +111,12 @@ void Window::BuildLevel() {
                 if(k+1 == numBlocks){
                     double coinChance = dis(gen);
                         if(coinChance < 0.3){
-                            std::cout<<"TUTAJ DODAC monetki" << std::endl; //TODO DEATHSCREEN i MONETKI
+                            level->coin = new Coin(this, 50 + (((i * innerLoop) + j) * blocksize) + (k * blocksize), 900-(k*blocksize) + + (blocksize + 50 ) );
+
                         }
 
                 }
             }
-
 
         }
     }
