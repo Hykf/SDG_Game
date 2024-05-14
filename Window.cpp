@@ -48,52 +48,81 @@ Window::~Window() {
 
 void Window::RenderAll() {
 
-    SDL_SetRenderDrawColor(renderer, 120, 120, 120, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 
-    Render(farBackground);
-    Render(nearBackground);
-    Render(levelDesign);
-    Render(gameObjects);
-    Render(foreGround);
-    Render(UI);
+    if(player->alive){
 
-    SDL_RenderPresent(renderer);
+        Render(farBackground);
+        Render(nearBackground);
+        Render(levelDesign);
+        Render(gameObjects);
+        Render(foreGround);
+        Render(UI);
 
         if(counter%(65-int(player->positionX/350))==0)
-            level->SpawnArrow();
+
+            for(int i = 0; i != (1+ int(player->positionX/2000)) ;i++){
+                level->SpawnArrow();
+            }
+
         counter++;
+    }else{
+        farBackground.clear();
+        nearBackground.clear();
+        levelDesign.clear();
+        gameObjects.clear();
+        foreGround.clear();
+        UI.clear();
+
+        SDL_Texture* objectTexture = IMG_LoadTexture(renderer, "../images/SKULL.png");
+        int textureWidth;
+        int textureHeight;
+        SDL_QueryTexture(objectTexture, NULL, NULL, &textureWidth, &textureHeight);
+
+        SDL_Rect dstRect = { static_cast<int>(250), static_cast<int>(250), 500, 500 }; // x i y pozycja na ekranie w i h rozmiar
+        SDL_Rect srcRect = { 0 , 0, 32, 32 }; // x i y wspolrzedne lewego gornego rogu w i h wspolrzednego prawego dolnego rogu //TODO ANIMACJA
+
+
+        SDL_RendererFlip flip;
+
+
+        SDL_RenderCopyEx(renderer, objectTexture, &srcRect, &dstRect,0.0, NULL, flip);
+
+
+    }
+
+    SDL_RenderPresent(renderer);
 
 }
 
 void Window::Render(std::vector<GameObject *> objToRender) {
 
     for(auto go : objToRender){
-        go->Render(*this);
+
+        if(go)
+         go->Render(*this);
     }
 
 }
 
 void Window::BuildLevel() {
-
     int blocksize = 150;
     int innerLoop = 25;
 
-    // Seed dla generatora liczb losowych
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0.0, 1.0); // Rozkład jednostajny na przedziale [0, 1)
+    std::uniform_real_distribution<> dis(0.0, 1.0);
 
     for (int i = 0; i != 10; i++) {
+
         level->farBackground = new FarBackground(this, -250 + (i * 1500), 0);
         level->nearBackground = new NearBackground(this, -250 + (i * 1000), 0);
 
         for (int j = 0; j != innerLoop; j++) {
 
-            // Losowanie, czy utworzyć klocek, i jeśli tak, to ile
-            int numBlocks = 1; // Domyślnie tworzymy jeden klocek
+            int numBlocks = 1;
             double randVal = dis(gen);
-
 
             if (randVal < 0.2) {
                 numBlocks = 0;
@@ -101,27 +130,29 @@ void Window::BuildLevel() {
                 numBlocks = 2;
             } else if (randVal < 0.6) {
                 numBlocks = 3;
-            }else if (randVal < 0.8) {
+            } else if (randVal < 0.8) {
                 numBlocks = 5;
             }
 
             for (int k = 0; k < numBlocks; k++) {
-                level->levelTile = new Tile(this, 0 + (((i * innerLoop) + j) * blocksize) + (k * blocksize),
-                                            (numBlocks==0)?2000:900-(k*blocksize), blocksize, blocksize);
-                if(k+1 == numBlocks){
-                    double coinChance = dis(gen);
-                        if(coinChance < 0.3){
-                            level->coin = new Coin(this, 50 + (((i * innerLoop) + j) * blocksize) + (k * blocksize), 900-(k*blocksize) + + (blocksize + 50 ) );
 
-                        }
+                int posX = 0 + (((i * innerLoop) + j) * blocksize) + (k * blocksize);
+                int posY = (numBlocks == 0) ? 2000 : 900 - (k * blocksize);
+
+                level->levelTile = new Tile(this, posX, posY, blocksize, blocksize);
+
+                if (k == numBlocks - 1) {
+                    double coinChance = dis(gen);
+                    if (coinChance < 0.3) {
+                        level->coin = new Coin(this, posX + blocksize, posY - (blocksize - 50));
+                    }
 
                 }
             }
-
         }
     }
-
 }
+
 
 void Window::Level::SpawnArrow() {
 
@@ -136,8 +167,8 @@ void Window::Level::SpawnArrow() {
     int maxY_Y = 760;
 
     // Generator liczb losowych dla X
-    std::uniform_int_distribution<> distribX(0, 1000);
-    std::uniform_int_distribution<> distribX2(posX + 550, maxX_X);
+    std::uniform_int_distribution<> distribX(-100, 1100);
+
 
     // Generator liczb losowych dla Y
     std::uniform_int_distribution<> distribY(minY_Y, maxY_Y);

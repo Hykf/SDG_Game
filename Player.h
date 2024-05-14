@@ -31,6 +31,9 @@ public:
     float positionY = 200;
     float velocityX;
     float velocityY;
+    const float jumpImpulse = 50.0f;
+    const float jumpDuration = 0.5f;
+    float jumpTime = 0.1f;
     float accelerationX = 0.5f;
     float accelerationY = 0.5f;
     int score = 0;
@@ -44,6 +47,7 @@ public:
     int isOnGround = 1;
     int jumpSpeed = 25;
     double gravity = 1;
+    bool alive = true;
 
     AnimStage animStage = IDLE;
 

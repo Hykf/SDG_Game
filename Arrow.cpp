@@ -13,6 +13,7 @@ Arrow::Arrow(Window *_window, int _posX, int _posY) {
     posX = _posX;
     posY = _posY;
     window->gameObjects.push_back(this);
+    objectSpawnTime = SDL_GetTicks();
 
 
     boxCollision = new BoundingBox(posX,posY,sizeX,sizeY);
@@ -39,8 +40,11 @@ Arrow::Arrow(Window *_window, int _posX, int _posY) {
 
 void Arrow::Update() {
 
+    CheckTime();
+
     posX += accX * speed;
     posY += accY * speed;
+
 
 }
 
@@ -70,14 +74,22 @@ void Arrow::Render(Window &renderer) {
     SDL_RenderCopyEx(renderer.renderer, objectTexture, &srcRect, &dstRect,-rotationAngle, NULL, flip);
 
     boxCollision->Move(newPositionX,newPositionY);
+
+    CheckTime();
 }
 
+void Arrow::CheckTime() {
+    Uint32 currentTime = SDL_GetTicks();
+    if (currentTime - objectSpawnTime >= 5000) {
+        deleted = true;
+        window->gameObjects.erase( std::find(window->gameObjects.begin(),window->gameObjects.end(),this));
+    }
+}
 
 
 
 Arrow::~Arrow() {
     window->gameObjects.erase( std::find(window->gameObjects.begin(),window->gameObjects.end(),this));
-
 }
 
 double Arrow::radiansToDegrees(double radians) {
@@ -89,3 +101,4 @@ double Arrow::calculateRotationAngle() {
     double angleDegrees = radiansToDegrees(angleRadians);
     return -angleDegrees;
 }
+

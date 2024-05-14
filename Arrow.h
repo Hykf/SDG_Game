@@ -19,15 +19,16 @@ public:
     int sizeY = 30;
     float accX;
     float accY;
-    float dirX{};
-    float dirY{};
     float speed = 10.5f;
+    uint32_t objectSpawnTime = 0;
+    bool deleted = false;
 
 
     virtual void Render(Window& renderer) override;
     void Update();
     double radiansToDegrees(double radians);
     double calculateRotationAngle();
+    void CheckTime();
 };
 
 

@@ -30,15 +30,17 @@ void Coin::Render(Window &renderer) {
     int newPositionX =  static_cast<int>(posX) - int(window->player->positionX);
     int newPositionY =  static_cast<int>(posY);
 
+    if(counter%20==0){
+        cc++;
+        cc = cc% 12;
+    }
+
 
     SDL_Rect dstRect = { newPositionX, static_cast<int>(newPositionY), sizeX, sizeY };
     SDL_Rect srcRect = { 3 + (cc * 16) , 3, 9, 10 };; //
 
 
-    if(counter%10==0){
-        cc++;
-        cc = cc% 12;
-    }
+
 
     counter++;
 

@@ -79,9 +79,7 @@ void Player::Movement(const Uint8 *state) {
         }
     }
 
-    const float jumpImpulse = 50.0f;
-    const float jumpDuration = 0.5f;
-    static float jumpTime = 0.1f;
+
 
         if (state[SDL_SCANCODE_W] && isOnGround) {
             velocityY = -jumpImpulse;
@@ -119,7 +117,7 @@ void Player::Movement(const Uint8 *state) {
         }
 
         velocityX = std::clamp(velocityX, -maxSpeed, maxSpeed);
-        velocityY = std::clamp(velocityY, float(-jumpSpeed), maxSpeed/2);
+        velocityY = std::clamp(velocityY, float(-jumpSpeed), (maxSpeed/2));
 
         positionX += velocityX;
         positionY += velocityY;
@@ -197,6 +195,8 @@ void Player::Update() {
     collisionDirection.clear();
 
     if(positionY > window->height){
+        positionY = -10;
+        ChangeHealth(5);
         std::cout<<positionY << " : "<< window->height << " DEATH is COMIING";
     }
 
@@ -300,7 +300,8 @@ void Player::SetHealthColor() {
     }
 
     if(health-0.01f <= 0)
-        std::cout<<"DEATH";
+        alive = false;
+
 
 }
 
