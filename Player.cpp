@@ -151,10 +151,9 @@ void Player::HandleMouseClick(SDL_Event &event) {
             tile = nullptr;
         }
 
-        tile = new Tile(window,mouseX+positionX,mouseY);
+        tile = new Tile(window,mouseX+positionX,mouseY,75,75);
         tile->cc = 3;
 
-        ChangeHealth(10);
 
         /// ZAMIENIC NA CREATE GAMEOBJECT (JAKAS KLASA POCHODNA FLOOR LUB TILE) I tam w konstruktorze niech to
         /// Doda sie do gameObjecs
@@ -223,7 +222,7 @@ bool Player::CheckForCollision(float dx, float dy) {
 
                         break;
                     case BoundingBox::DANGER:
-                        ChangeHealth(12);
+                        ChangeHealth(17);
                         coll->collType = BoundingBox::NONE;
                         break;
 
@@ -261,7 +260,7 @@ void Player::CheckOnGround() {
     if(isOnGround){
         gravity = 0;
     } else{
-        gravity = 3; //Im wieksze to tym nizej da rade skoczyc
+        gravity = 2; //Im wieksze to tym nizej da rade skoczyc
     }
 
 }
@@ -297,10 +296,12 @@ void Player::RunAnimation(Window &renderer) {
         case IDLE:
             startYpos = 9;
             animEndFram = 4;
+            currentStage = currentStage % animEndFram;
             break;
         case RUN:
             startYpos = 74;
             animEndFram = 8;
+            currentStage = currentStage % animEndFram;
             break;
         case GETHIT:
             break;
@@ -317,7 +318,6 @@ void Player::RunAnimation(Window &renderer) {
     if (counter % 10 == 0) {
         currentStage++;
         currentStage = currentStage % animEndFram;
-        std::cout<<facingRight << std::endl;
     }
 
     SDL_RendererFlip flip;

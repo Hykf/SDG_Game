@@ -39,7 +39,6 @@ int BoundingBox::CollisionDirection(const BoundingBox& otherBox) {
     int thisBottom = y + height;
     int otherBottom = otherBox.y + otherBox.height;
 
-
     int overlapX = (thisRight - otherBox.x) - (otherRight - x);
     int overlapY = (thisBottom - otherBox.y) - (otherBottom - y);
 

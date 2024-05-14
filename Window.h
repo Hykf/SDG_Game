@@ -28,7 +28,7 @@ public:
         Window* window = nullptr;
         Tile* levelTile;
 
-        void SpawnArrow(int x, int y);
+        void SpawnArrow();
     };
 
     Window(int width, int height);

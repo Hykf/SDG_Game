@@ -41,10 +41,12 @@ add_executable(SGD_Game main.cpp
 
 file(COPY "E:/C++_Libs/SDL2_image/lib/SDL2_image.dll" DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY "E:/C++_Libs/SDL2_mixer/SDL2_mixer.dll" DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY "E:/C++_Libs/SDL2_mixer/smpeg2.dll" DESTINATION ${CMAKE_BINARY_DIR})
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2main.lib )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2.lib )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIB_DIR}/SDL2test.lib)
 target_link_libraries(${PROJECT_NAME} "E:/C++_Libs/SDL2_image/lib/SDL2_image.dll")
 target_link_libraries(${PROJECT_NAME} "E:/C++_Libs/SDL2_mixer/SDL2_mixer.dll")
+target_link_libraries(${PROJECT_NAME} "E:/C++_Libs/SDL2_mixer/smpeg2.dll")
 

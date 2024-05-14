@@ -15,18 +15,19 @@ public:
 
     int posX;
     int posY;
-    int sizeX = 20;
-    int sizeY = 10;
+    int sizeX = 60;
+    int sizeY = 30;
     float accX;
     float accY;
     float dirX;
     float dirY;
-    float speed = 5.5f;
+    float speed = 10.5f;
 
 
     virtual void Render(Window& renderer) override;
     void Update();
-
+    double radiansToDegrees(double radians);
+    double calculateRotationAngle();
 };
 
 

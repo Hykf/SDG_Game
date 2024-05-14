@@ -1,0 +1,12 @@
+TODO :
+
+coins
+enemy bullet's 
+finish line
+more advanced level generation
+coin counter? 
+rolls
+
+GameObject add enum {Level, coins, finish, enemy}
+
+player objective is to reach finish line 
