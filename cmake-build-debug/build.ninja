@@ -140,6 +140,13 @@ build CMakeFiles/SGD_Game.dir/Coin.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Deb
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
+build CMakeFiles/SGD_Game.dir/ForeGround.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/ForeGround.cpp || cmake_object_order_depends_target_SGD_Game
+  DEP_FILE = CMakeFiles\SGD_Game.dir\ForeGround.cpp.obj.d
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/SDL2_mixer
+  OBJECT_DIR = CMakeFiles\SGD_Game.dir
+  OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target SGD_Game
@@ -148,7 +155,7 @@ build CMakeFiles/SGD_Game.dir/Coin.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Deb
 #############################################
 # Link the executable SGD_Game.exe
 
-build SGD_Game.exe: CXX_EXECUTABLE_LINKER__SGD_Game_Debug CMakeFiles/SGD_Game.dir/main.cpp.obj CMakeFiles/SGD_Game.dir/Window.cpp.obj CMakeFiles/SGD_Game.dir/Player.cpp.obj CMakeFiles/SGD_Game.dir/LevelLayout.cpp.obj CMakeFiles/SGD_Game.dir/GameObject.cpp.obj CMakeFiles/SGD_Game.dir/Tile.cpp.obj CMakeFiles/SGD_Game.dir/LevelDesign.cpp.obj CMakeFiles/SGD_Game.dir/UI.cpp.obj CMakeFiles/SGD_Game.dir/BoundingBox.cpp.obj CMakeFiles/SGD_Game.dir/FarBackground.cpp.obj CMakeFiles/SGD_Game.dir/NearBackground.cpp.obj CMakeFiles/SGD_Game.dir/Arrow.cpp.obj CMakeFiles/SGD_Game.dir/Coin.cpp.obj | E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2main.lib E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2.lib E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2test.lib E$:/C++_Libs/SDL2_image/lib/SDL2_image.dll E$:/C++_Libs/SDL2_mixer/SDL2_mixer.dll E$:/C++_Libs/SDL2_mixer/smpeg2.dll
+build SGD_Game.exe: CXX_EXECUTABLE_LINKER__SGD_Game_Debug CMakeFiles/SGD_Game.dir/main.cpp.obj CMakeFiles/SGD_Game.dir/Window.cpp.obj CMakeFiles/SGD_Game.dir/Player.cpp.obj CMakeFiles/SGD_Game.dir/LevelLayout.cpp.obj CMakeFiles/SGD_Game.dir/GameObject.cpp.obj CMakeFiles/SGD_Game.dir/Tile.cpp.obj CMakeFiles/SGD_Game.dir/LevelDesign.cpp.obj CMakeFiles/SGD_Game.dir/UI.cpp.obj CMakeFiles/SGD_Game.dir/BoundingBox.cpp.obj CMakeFiles/SGD_Game.dir/FarBackground.cpp.obj CMakeFiles/SGD_Game.dir/NearBackground.cpp.obj CMakeFiles/SGD_Game.dir/Arrow.cpp.obj CMakeFiles/SGD_Game.dir/Coin.cpp.obj CMakeFiles/SGD_Game.dir/ForeGround.cpp.obj | E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2main.lib E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2.lib E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2test.lib E$:/C++_Libs/SDL2_image/lib/SDL2_image.dll E$:/C++_Libs/SDL2_mixer/SDL2_mixer.dll E$:/C++_Libs/SDL2_mixer/smpeg2.dll
   FLAGS = -g
   LINK_LIBRARIES = E:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2main.lib  E:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2.lib  E:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2test.lib  E:/C++_Libs/SDL2_image/lib/SDL2_image.dll  E:/C++_Libs/SDL2_mixer/SDL2_mixer.dll  E:/C++_Libs/SDL2_mixer/smpeg2.dll  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\SGD_Game.dir

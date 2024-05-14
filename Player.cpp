@@ -50,7 +50,7 @@ void Player::Render(Window &renderer) {
 
 void Player::Movement(const Uint8 *state) {
 
-    AnimStage tempAnim = IDLE;
+    AnimStage tempAnim = (animStage==GETHIT)?GETHIT:IDLE;
 
     bool hasTopCollision = (std::find(collisionDirection.begin(), collisionDirection.end(), 0) != collisionDirection.end());
     bool hasRightCollision = (std::find(collisionDirection.begin(), collisionDirection.end(), 1) != collisionDirection.end());
@@ -100,14 +100,14 @@ void Player::Movement(const Uint8 *state) {
     if (!hasLeftCollision && state[SDL_SCANCODE_A]) {
         velocityX -= acceleration;
         facingRight = false;
-        animStage = RUN;
+        animStage = (animStage==GETHIT)?GETHIT:RUN;
     } else if (!hasRightCollision && state[SDL_SCANCODE_D]) {
         velocityX += acceleration;
         facingRight = true;
-        animStage = RUN;
+        animStage = (animStage==GETHIT)?GETHIT:RUN;
     } else {
         velocityX = 0;
-        animStage = IDLE;
+        animStage = (animStage==GETHIT)?GETHIT:IDLE;
     }
 
         CheckOnGround();
@@ -183,7 +183,6 @@ void Player::Update() {
 
     Movement(state);
 
-
     if(counter%10==0){
 
         //std::cout<<"DT: "<<window->DeltaTime << "\n";
@@ -197,7 +196,6 @@ void Player::Update() {
     if(positionY > window->height){
         positionY = -10;
         ChangeHealth(5);
-        std::cout<<positionY << " : "<< window->height << " DEATH is COMIING";
     }
 
 }
@@ -225,6 +223,7 @@ bool Player::CheckForCollision(float dx, float dy) {
                     case BoundingBox::DANGER:
 
                         ChangeHealth(17);
+                        animStage = GETHIT;
                         coll->collType = BoundingBox::NONE;
                         {
                             auto a = dynamic_cast<Arrow*>(x);
@@ -322,6 +321,8 @@ void Player::RunAnimation(Window &renderer) {
             currentStage = currentStage % animEndFram;
             break;
         case GETHIT:
+            startYpos = 201;
+            animEndFram = 4;
             break;
         case DEATH:
             break;
@@ -331,10 +332,15 @@ void Player::RunAnimation(Window &renderer) {
 
 
     SDL_Rect dstRect = { static_cast<int>(500)-(sizeX/2), static_cast<int>(positionY)-(sizeY), sizeX*2, sizeY*2 }; // x i y pozycja na ekranie w i h rozmiar
-    SDL_Rect srcRect = { 9 + (currentStage * 32), startYpos, 13, 20 }; // x i y wspolrzedne lewego gornego rogu w i h wspolrzednego prawego dolnego rogu //TODO ANIMACJA
+    SDL_Rect srcRect = { 9 + (currentStage * 32), startYpos, 13, 20 };
 
     if (counter % 10 == 0) {
         currentStage++;
+
+        if(animStage==GETHIT && currentStage==animEndFram){
+            animStage = IDLE;
+        }
+
         currentStage = currentStage % animEndFram;
     }
 

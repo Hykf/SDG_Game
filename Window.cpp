@@ -62,7 +62,7 @@ void Window::RenderAll() {
 
         if(counter%(65-int(player->positionX/350))==0)
 
-            for(int i = 0; i != (1+ int(player->positionX/2000)) ;i++){
+            for(int i = 0; i != (1+ int(player->positionX/5000)) ;i++){
                 level->SpawnArrow();
             }
 
@@ -118,6 +118,7 @@ void Window::BuildLevel() {
 
         level->farBackground = new FarBackground(this, -250 + (i * 1500), 0);
         level->nearBackground = new NearBackground(this, -250 + (i * 1000), 0);
+        level->foreGround = new ForeGround(this,-250 + (i * 1500), 0);
 
         for (int j = 0; j != innerLoop; j++) {
 

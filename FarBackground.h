@@ -1,6 +1,3 @@
-//
-// Created by man91 on 12.05.2024.
-//
 
 #ifndef SGD_GAME_FARBACKGROUND_H
 #define SGD_GAME_FARBACKGROUND_H

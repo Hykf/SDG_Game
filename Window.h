@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "FarBackground.h"
 #include "NearBackground.h"
+#include "ForeGround.h"
 #include <vector>
 #include <SDL_mixer.h>
 #include "Coin.h"
@@ -26,6 +27,7 @@ public:
 
         FarBackground* farBackground = nullptr;
         NearBackground* nearBackground = nullptr;
+        ForeGround* foreGround = nullptr;
         Window* window = nullptr;
         Tile* levelTile;
         Coin* coin =nullptr;
