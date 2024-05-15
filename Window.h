@@ -10,8 +10,8 @@
 #include "NearBackground.h"
 #include "ForeGround.h"
 #include <vector>
-#include <SDL_mixer.h>
 #include "Coin.h"
+
 
 class Tile;
 class GameObject;
@@ -41,8 +41,6 @@ public:
     SDL_Window *window;
     SDL_Renderer *renderer;
     Player* player;
-    Mix_Music *music = nullptr;
-
     Level* level = nullptr;
 
     int width = 1000;

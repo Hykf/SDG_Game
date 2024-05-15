@@ -5,8 +5,9 @@
 #include "Tile.h"
 #include "Arrow.h"
 #include <random>
-#include <SDL_mixer.h>
 #include "Coin.h"
+#include <windows.h>
+
 
 Window::Window(int width, int height) {
     SDL_Init( SDL_INIT_EVERYTHING );
@@ -18,18 +19,11 @@ Window::Window(int width, int height) {
     player = new Player(this);
     level = new Level(this);
 
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 1, 2048);
-    music = Mix_LoadMUS("../music/time_for_adventure_WAV.wav");
 
-    if (!music) {
-        std::cerr << "SOUND ERROR:  " << Mix_GetError() << std::endl;
-    }
 
-    int channel = Mix_PlayMusic(music, -1);
-    Mix_Volume(channel, MIX_MAX_VOLUME);
+   std::cout<< GetLastError();
 
     level->levelTile = new Tile(this,500,350,200,100 );
-
     BuildLevel();
 
 }
@@ -38,8 +32,6 @@ Window::~Window() {
 
     if(level) delete level;
 
-    Mix_FreeMusic(music);
-    Mix_CloseAudio();
     SDL_DestroyRenderer( renderer );
     SDL_DestroyWindow( window );
     SDL_Quit();
@@ -47,6 +39,8 @@ Window::~Window() {
 }
 
 void Window::RenderAll() {
+
+    PlaySound(TEXT("BackgroundMusicWav.wav"), NULL,  SND_FILENAME |  SND_LOOP | SND_ASYNC | SND_NOSTOP);
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);

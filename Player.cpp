@@ -6,9 +6,8 @@
 #include <SDL_image.h>
 #include <iostream>
 #include "Tile.h"
-#include "SDL_mixer.h"
 #include "Arrow.h"
-
+#include <windows.h>
 
 Player::Player(Window *_window) {
     window = _window;
@@ -221,7 +220,7 @@ bool Player::CheckForCollision(float dx, float dy) {
                         break;
 
                     case BoundingBox::DANGER:
-
+                        PlaySound(TEXT("../sounds/hurt.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         ChangeHealth(17);
                         animStage = GETHIT;
                         coll->collType = BoundingBox::NONE;
@@ -236,6 +235,7 @@ bool Player::CheckForCollision(float dx, float dy) {
                     case BoundingBox::COIN:
                         score++;
                         coll->collType = BoundingBox::NONE;
+                        PlaySound(TEXT("../sounds/coin.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         {
                             auto a = dynamic_cast<Coin*>(x);
                             a->sizeX = 0;
@@ -346,7 +346,7 @@ void Player::RunAnimation(Window &renderer) {
 
     SDL_RendererFlip flip;
 
-    flip = static_cast<SDL_RendererFlip>((facingRight == 0) ? SDL_FLIP_HORIZONTAL : NULL);
+    flip = static_cast<SDL_RendererFlip>((facingRight == 0) ? SDL_FLIP_HORIZONTAL :  SDL_FLIP_NONE);
 
     SDL_RenderCopyEx(renderer.renderer, objectTexture, &srcRect, &dstRect,0.0, NULL, flip);
 
