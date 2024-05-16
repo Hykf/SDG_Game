@@ -246,14 +246,10 @@ void Window::Level::SpawnArrow() {
     int minY_Y = -100;
     int maxY_Y = 760;
 
-    // Generator liczb losowych dla X
     std::uniform_int_distribution<> distribX(-100, 1100);
 
-
-    // Generator liczb losowych dla Y
     std::uniform_int_distribution<> distribY(minY_Y, maxY_Y);
 
-    // Losowe wartości X i Y
     int randomX = (distribX(gen));
     int randomY = distribY(gen);
 
