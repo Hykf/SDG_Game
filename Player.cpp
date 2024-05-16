@@ -78,11 +78,10 @@ void Player::Movement(const Uint8 *state) {
         }
     }
 
-
-
         if (state[SDL_SCANCODE_W] && isOnGround) {
             velocityY = -jumpImpulse;
             jumpTime = jumpDuration;
+            PlaySound(TEXT("../sounds/jump.wav"), NULL, SND_FILENAME | SND_ASYNC);
         }
 
     if (jumpTime > 0.0f) {
@@ -150,7 +149,8 @@ void Player::HandleMouseClick(SDL_Event &event) {
         }
 
         tile = new Tile(window,mouseX+positionX,mouseY,75,75);
-        tile->cc = 3;
+        tile->cc = 6;
+        PlaySound(TEXT("../sounds/tap.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 
         /// ZAMIENIC NA CREATE GAMEOBJECT (JAKAS KLASA POCHODNA FLOOR LUB TILE) I tam w konstruktorze niech to
@@ -182,9 +182,9 @@ void Player::Update() {
 
     Movement(state);
 
-    if(counter%10==0){
+    if(counter%100==0){
 
-        //std::cout<<"DT: "<<window->DeltaTime << "\n";
+        std::cout<<"SCORE: "<< score << "\n";
 
     }
 
@@ -195,6 +195,7 @@ void Player::Update() {
     if(positionY > window->height){
         positionY = -10;
         ChangeHealth(5);
+        PlaySound(TEXT("../sounds/hurt.wav"), NULL, SND_FILENAME | SND_ASYNC);
     }
 
 }
@@ -220,16 +221,19 @@ bool Player::CheckForCollision(float dx, float dy) {
                         break;
 
                     case BoundingBox::DANGER:
+
                         PlaySound(TEXT("../sounds/hurt.wav"), NULL, SND_FILENAME | SND_ASYNC);
                         ChangeHealth(17);
                         animStage = GETHIT;
                         coll->collType = BoundingBox::NONE;
+
                         {
                             auto a = dynamic_cast<Arrow*>(x);
                             a->sizeX = 0;
                             a->sizeY = 0;
 
                         }
+
                         break;
 
                     case BoundingBox::COIN:

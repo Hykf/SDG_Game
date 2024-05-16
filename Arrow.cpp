@@ -80,7 +80,7 @@ void Arrow::Render(Window &renderer) {
 
 void Arrow::CheckTime() {
     Uint32 currentTime = SDL_GetTicks();
-    if (currentTime - objectSpawnTime >= 5000) {
+    if (currentTime - objectSpawnTime >= 20000) {
         deleted = true;
         window->gameObjects.erase( std::find(window->gameObjects.begin(),window->gameObjects.end(),this));
     }

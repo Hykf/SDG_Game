@@ -19,7 +19,7 @@ public:
         int sizeY = 50;
 
         int counter = 1;
-        int cc  = 0;
+        int cc  = 8;
 
         virtual void Render(Window& renderer) override;
 

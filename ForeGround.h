@@ -16,7 +16,7 @@ public:
     float positionX = 250;
     float positionY = 250;
 
-    int sizeX = 1500;
+    int sizeX = 2000;
     int sizeY = 1000;
 
     void Render(Window& renderer) override;

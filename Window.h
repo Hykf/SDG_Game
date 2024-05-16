@@ -11,6 +11,8 @@
 #include "ForeGround.h"
 #include <vector>
 #include "Coin.h"
+#include <AL/al.h>
+#include <AL/alc.h>
 
 
 class Tile;
@@ -46,9 +48,11 @@ public:
     int width = 1000;
     int height= 1000;
     uint64_t counter = 0;
+    bool makeLastSound = true;
 
     float DeltaTime = 0.4;
-
+    ALuint backgroundMusicBuffer;
+    ALuint backgroundMusicSource;
 
     std::vector<GameObject*> farBackground;
     std::vector<GameObject*> nearBackground;
@@ -60,6 +64,8 @@ public:
     void Render(std::vector<GameObject*> objToRender);
     void RenderAll();
     void BuildLevel();
+    bool loadWavFile(const char* filename, ALuint buffer);
+    void InitMusic();
 };
 
 #endif // WINDOW_H
