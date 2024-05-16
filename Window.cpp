@@ -64,7 +64,7 @@ void Window::RenderAll() {
         counter++;
     }else{
 
-        const int finalScore = player->score * (player->positionX/1000);
+        int finalScore = player->score * (player->positionX/1000);
 
         farBackground.clear();
         nearBackground.clear();
@@ -88,13 +88,15 @@ void Window::RenderAll() {
 
         if(counter%100==0){
             std::cout<< "FINAL SCORE: " << finalScore << std::endl;
-
         }
 
         if(makeLastSound){
             PlaySound(TEXT("../sounds/explosion.wav"), NULL, SND_FILENAME | SND_ASYNC);
+            std::cout<< "FINAL SCORE: " << finalScore << std::endl;
             makeLastSound = false;
         }
+
+        counter++;
 
     }
 
