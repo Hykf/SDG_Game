@@ -54,86 +54,53 @@ void Player::Movement(const Uint8 *state) {
     bool hasTopCollision = (std::find(collisionDirection.begin(), collisionDirection.end(), 0) != collisionDirection.end());
     bool hasRightCollision = (std::find(collisionDirection.begin(), collisionDirection.end(), 1) != collisionDirection.end());
     bool hasLeftCollision = (std::find(collisionDirection.begin(), collisionDirection.end(), 3) != collisionDirection.end());
+    bool hasCollision = CheckForCollision(velocityX, velocityY);
 
-    for (int i=0;i!=collisionDirection.size();i++){
+    CheckOnGround();
 
-        switch (i) {
-            case 0:
-                if (state[SDL_SCANCODE_W]) {
-                } break;
-            case 1:
-                if (state[SDL_SCANCODE_D]) {
-                    velocityX = 0;
-                } break;
-            case 2:
-                if (state[SDL_SCANCODE_S]) {
-                    velocityY = 0;
-                } break;
-            case 3:
-                if (state[SDL_SCANCODE_A]) {
-                    velocityX = 0;
-                } break;
-            default: break;
-
-        }
-    }
-
-        if (state[SDL_SCANCODE_W] && isOnGround) {
-            velocityY = -jumpImpulse;
-            jumpTime = jumpDuration;
-            PlaySound(TEXT("../sounds/jump.wav"), NULL, SND_FILENAME | SND_ASYNC);
-        }
-
-    if (jumpTime > 0.0f) {
-        velocityY += gravity * (1.0f - (jumpTime / jumpDuration));
-
-    } else {
+    if (!isOnGround) {
         velocityY += gravity;
+        velocityY += maxSpeed * window->DeltaTime;
+        velocityY += gravity * (1.0f - (jumpTime / jumpDuration));
     }
 
-        if (state[SDL_SCANCODE_S]) {
-            //velocityY += acceleration;
-        }
+    Uint32 currentTime = SDL_GetTicks();
+    bool canJump = (currentTime - lastJumpTime > jumpCooldown);
 
-    if (!hasLeftCollision && state[SDL_SCANCODE_A]) {
+    if (state[SDL_SCANCODE_W] && isOnGround && canJump) {
+        velocityY = -jumpImpulse;
+        jumpTime = jumpDuration;
+        PlaySound(TEXT("../sounds/jump.wav"), NULL, SND_FILENAME | SND_ASYNC);
+        lastJumpTime = currentTime;
+    }
+
+    if (state[SDL_SCANCODE_A] && !hasLeftCollision && !hasTopCollision) {
         velocityX -= acceleration;
         facingRight = false;
-        animStage = (animStage==GETHIT)?GETHIT:RUN;
-    } else if (!hasRightCollision && state[SDL_SCANCODE_D]) {
+        animStage = (animStage == GETHIT) ? GETHIT : RUN;
+    }
+    else if (state[SDL_SCANCODE_D] && !hasRightCollision && !hasTopCollision) {
         velocityX += acceleration;
         facingRight = true;
-        animStage = (animStage==GETHIT)?GETHIT:RUN;
+        animStage = (animStage == GETHIT) ? GETHIT : RUN;
     } else {
         velocityX = 0;
-        animStage = (animStage==GETHIT)?GETHIT:IDLE;
+        animStage = (animStage == GETHIT) ? GETHIT : IDLE;
     }
 
-        CheckOnGround();
+    velocityX = std::clamp(velocityX, -maxSpeed, maxSpeed);
+    velocityY = std::clamp(velocityY, float(-jumpSpeed), (maxSpeed * 2));
 
-        if (!isOnGround) {
-            velocityY += gravity;
-        }
+    positionX += velocityX;
+    positionY += velocityY;
 
-        velocityX = std::clamp(velocityX, -maxSpeed, maxSpeed);
-        velocityY = std::clamp(velocityY, float(-jumpSpeed), (maxSpeed/2));
+    if (!state[SDL_SCANCODE_W] && !state[SDL_SCANCODE_S] && isOnGround) {
+        velocityY = 0.0f;
+    }
 
-        positionX += velocityX;
-        positionY += velocityY;
-
-        if (!state[SDL_SCANCODE_W] && !state[SDL_SCANCODE_S]) {
-            if (std::abs(velocityY) < deceleration) {
-                velocityY = 0.0f;
-            } else {
-                velocityY -= (velocityY > 0) ? deceleration : -deceleration;
-            }
-        }
-        if (!state[SDL_SCANCODE_A] && !state[SDL_SCANCODE_D]) {
-            if (std::abs(velocityX) < deceleration) {
-                velocityX = 0.0f;
-            } else {
-                velocityX -= (velocityX > 0) ? deceleration : -deceleration;
-            }
-        }
+    if (!state[SDL_SCANCODE_A] && !state[SDL_SCANCODE_D]) {
+        velocityX = 0.0f;
+    }
 
 }
 
@@ -166,7 +133,7 @@ void Player::ChangeHealth(int change) {
 
 void Player::Update() {
 
-    bool isCollision = CheckForCollision(this->velocityX,velocityY);
+    bool isCollision = CheckForCollision(this->maxSpeed,maxSpeed);
 
     boxCollision->drawBoundingBox(window->renderer);
     boxCollision->Move(500,positionY);
@@ -203,77 +170,35 @@ void Player::Update() {
 bool Player::CheckForCollision(float dx, float dy) {
 
     bool ret = false;
-    for(auto x : window->gameObjects){
+    BoundingBox futureBox = *boxCollision;
+    futureBox.x += dx;
+    futureBox.y += dy;
 
-        if(x == this) continue;
-
+    for (auto x : window->gameObjects) {
+        if (x == this) continue;
         auto coll = x->boxCollision;
-
-        if(coll != nullptr){
-
-
-            if(boxCollision->CheckCollision(*coll,velocityX,velocityY)){
-                switch(coll->collType){
-
-                    case BoundingBox::BLOCK:
-                        collisionDirection.push_back(boxCollision->CollisionDirection(*coll));
-                        ret =  true;
-                        break;
-
-                    case BoundingBox::DANGER:
-
-                        PlaySound(TEXT("../sounds/hurt.wav"), NULL, SND_FILENAME | SND_ASYNC);
-                        ChangeHealth(17);
-                        animStage = GETHIT;
-                        coll->collType = BoundingBox::NONE;
-
-                        {
-                            auto a = dynamic_cast<Arrow*>(x);
-                            a->sizeX = 0;
-                            a->sizeY = 0;
-
-                        }
-
-                        break;
-
-                    case BoundingBox::COIN:
-                        score++;
-                        coll->collType = BoundingBox::NONE;
-                        PlaySound(TEXT("../sounds/coin.wav"), NULL, SND_FILENAME | SND_ASYNC);
-                        {
-                            auto a = dynamic_cast<Coin*>(x);
-                            a->sizeX = 0;
-                            a->sizeY = 0;
-
-                        }
-                        break;
-
-                    case BoundingBox::FINISH:
-                        break;
-                    default:
-                        break;
-
-                }
-
+        if (coll != nullptr) {
+            if (futureBox.CheckCollision(*coll, 0, 0)) {
+                HandleCollision(coll,x);
+                ret = true;
             }
         }
     }
 
-    for(auto x : window->levelDesign){
+    for (auto x : window->levelDesign) {
         auto coll = x->boxCollision;
-
-        if(coll != nullptr)
-            if(boxCollision->CheckCollision(*coll,velocityX,velocityY)){
-                collisionDirection.push_back(boxCollision->CollisionDirection(*coll));
-                ret = true;
-            }
-   }
+        if (coll != nullptr && futureBox.CheckCollision(*coll, 0, 0)) {
+            HandleCollision(coll,x);
+            ret = true;
+        }
+    }
 
     return ret;
 }
 
 void Player::CheckOnGround() {
 
+    bool isCollision = CheckForCollision(this->maxSpeed,maxSpeed);
     auto x = std::find(collisionDirection.begin(), collisionDirection.end(), 2);
     isOnGround = (x != collisionDirection.end());
 
@@ -356,4 +281,41 @@ void Player::RunAnimation(Window &renderer) {
 
 
 
+}
+
+void Player::HandleCollision(BoundingBox *coll, GameObject* go) {
+    switch (coll->collType) {
+        case BoundingBox::BLOCK:
+            collisionDirection.push_back(boxCollision->CollisionDirection(*coll));
+            break;
+        case BoundingBox::DANGER:
+            PlaySound(TEXT("../sounds/hurt.wav"), NULL, SND_FILENAME | SND_ASYNC);
+            ChangeHealth(17);
+            animStage = GETHIT;
+            coll->collType = BoundingBox::NONE;
+
+            {
+                Arrow *arr = dynamic_cast<Arrow *>(go);
+                arr->sizeX = 0;
+                arr->sizeY = 0;
+            }
+
+            break;
+        case BoundingBox::COIN:
+            score++;
+            coll->collType = BoundingBox::NONE;
+            PlaySound(TEXT("../sounds/coin.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
+            {
+                Coin *coin = dynamic_cast<Coin *>(go);
+                coin->sizeX = 0;
+                coin->sizeY = 0;
+            }
+
+            break;
+        case BoundingBox::FINISH:
+            break;
+        default:
+            break;
+    }
 }

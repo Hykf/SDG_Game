@@ -31,7 +31,7 @@ public:
     float positionY = 200;
     float velocityX;
     float velocityY;
-    const float jumpImpulse = 50.0f;
+    const float jumpImpulse = 500.0f;
     const float jumpDuration = 0.5f;
     float jumpTime = 0.1f;
     float accelerationX = 0.5f;
@@ -48,6 +48,8 @@ public:
     int jumpSpeed = 25;
     double gravity = 1;
     bool alive = true;
+    Uint32 lastJumpTime = 0;
+    const Uint32 jumpCooldown = 300; // ms
 
     AnimStage animStage = IDLE;
 
@@ -69,6 +71,7 @@ public:
     void Update();
     bool CheckForCollision(float dx, float dy);
     void CheckOnGround();
+    void HandleCollision(BoundingBox* coll, GameObject* gm);
     void SetHealthColor();
     void RunAnimation(Window &renderer);
 };

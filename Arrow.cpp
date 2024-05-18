@@ -23,9 +23,9 @@ Arrow::Arrow(Window *_window, int _posX, int _posY) {
     double dirX = 500 - (posX - window->player->positionX);
     double dirY = window->player->positionY - posY;
 
-    double length = sqrt(dirX * dirX + dirY * dirY);//To UnitVec
+    double length = sqrt((dirX * dirX) + (dirY * dirY));//To dlugosc wektora SQRT(A^2 + B^2)
 
-    if (length != 0) {
+    if (length != 0) { // Unit vec
         accX = dirX / length;
         accY = dirY / length;
     } else {
@@ -85,8 +85,6 @@ void Arrow::CheckTime() {
         window->gameObjects.erase( std::find(window->gameObjects.begin(),window->gameObjects.end(),this));
     }
 }
-
-
 
 Arrow::~Arrow() {
     window->gameObjects.erase( std::find(window->gameObjects.begin(),window->gameObjects.end(),this));

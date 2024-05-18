@@ -6,30 +6,7 @@ bool BoundingBox::CheckCollision(const BoundingBox &otherBox, int dx, int dy) co
     int thisBottom = y + height + dy;
     int otherBottom = otherBox.y + otherBox.height;
 
-    if (thisRight < otherBox.x || x + dx > otherRight ||
-        thisBottom < otherBox.y || y + dy > otherBottom) {
-        return false;
-    }
-    return true;
-}
-
-void BoundingBox::drawBoundingBox(SDL_Renderer *renderer) const {
-
-    if(debugShow){
-        SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-
-        SDL_Rect rect = { x, y, width, height };
-
-        SDL_RenderDrawRect(renderer, &rect);
-    }
-
-}
-
-void BoundingBox::Move(int nx, int ny) {
-
-    x = nx;
-    y = ny;
-
+    return !(thisRight < otherBox.x || x + dx > otherRight ||thisBottom < otherBox.y || y + dy > otherBottom);
 }
 
 int BoundingBox::CollisionDirection(const BoundingBox& otherBox) {
@@ -62,4 +39,23 @@ int BoundingBox::CollisionDirection(const BoundingBox& otherBox) {
 
 
     return -1;
+}
+
+void BoundingBox::drawBoundingBox(SDL_Renderer *renderer) const {
+
+    if(debugShow){
+        SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+
+        SDL_Rect rect = { x, y, width, height };
+
+        SDL_RenderDrawRect(renderer, &rect);
+    }
+
+}
+
+void BoundingBox::Move(int nx, int ny) {
+
+    x = nx;
+    y = ny;
+
 }
