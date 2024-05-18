@@ -52,98 +52,98 @@ build cmake_object_order_depends_target_SGD_Game: phony || CMakeFiles/SGD_Game.d
 build CMakeFiles/SGD_Game.dir/main.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/main.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/Window.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/Window.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\Window.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/Player.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/Player.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\Player.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/LevelLayout.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/LevelLayout.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\LevelLayout.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/GameObject.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/GameObject.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\GameObject.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/Tile.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/Tile.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\Tile.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/LevelDesign.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/LevelDesign.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\LevelDesign.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/UI.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/UI.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\UI.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/BoundingBox.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/BoundingBox.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\BoundingBox.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/FarBackground.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/FarBackground.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\FarBackground.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/NearBackground.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/NearBackground.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\NearBackground.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/Arrow.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/Arrow.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\Arrow.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/Coin.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/Coin.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\Coin.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
 build CMakeFiles/SGD_Game.dir/ForeGround.cpp.obj: CXX_COMPILER__SGD_Game_unscanned_Debug E$:/CLionProjects/SGD_Game/ForeGround.cpp || cmake_object_order_depends_target_SGD_Game
   DEP_FILE = CMakeFiles\SGD_Game.dir\ForeGround.cpp.obj.d
   FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
-  INCLUDES = -IE:/C++_Libs/SDL2-2.30.1/include -IE:/C++_Libs/SDL2_image -IE:/C++_Libs/openAL/openal-soft/include
+  INCLUDES = -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2-2.30.1/include -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/SDL2_image -IE:/CLionProjects/SGD_Game/cmake-build-debug/LIBS/openAL/openal-soft/include
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   OBJECT_FILE_DIR = CMakeFiles\SGD_Game.dir
 
@@ -155,9 +155,9 @@ build CMakeFiles/SGD_Game.dir/ForeGround.cpp.obj: CXX_COMPILER__SGD_Game_unscann
 #############################################
 # Link the executable SGD_Game.exe
 
-build SGD_Game.exe: CXX_EXECUTABLE_LINKER__SGD_Game_Debug CMakeFiles/SGD_Game.dir/main.cpp.obj CMakeFiles/SGD_Game.dir/Window.cpp.obj CMakeFiles/SGD_Game.dir/Player.cpp.obj CMakeFiles/SGD_Game.dir/LevelLayout.cpp.obj CMakeFiles/SGD_Game.dir/GameObject.cpp.obj CMakeFiles/SGD_Game.dir/Tile.cpp.obj CMakeFiles/SGD_Game.dir/LevelDesign.cpp.obj CMakeFiles/SGD_Game.dir/UI.cpp.obj CMakeFiles/SGD_Game.dir/BoundingBox.cpp.obj CMakeFiles/SGD_Game.dir/FarBackground.cpp.obj CMakeFiles/SGD_Game.dir/NearBackground.cpp.obj CMakeFiles/SGD_Game.dir/Arrow.cpp.obj CMakeFiles/SGD_Game.dir/Coin.cpp.obj CMakeFiles/SGD_Game.dir/ForeGround.cpp.obj | E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2main.lib E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2.lib E$:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2test.lib E$:/C++_Libs/SDL2_image/lib/SDL2_image.dll E$:/C++_Libs/openAL/openal-soft/build/Debug/OpenAL32.dll
+build SGD_Game.exe: CXX_EXECUTABLE_LINKER__SGD_Game_Debug CMakeFiles/SGD_Game.dir/main.cpp.obj CMakeFiles/SGD_Game.dir/Window.cpp.obj CMakeFiles/SGD_Game.dir/Player.cpp.obj CMakeFiles/SGD_Game.dir/LevelLayout.cpp.obj CMakeFiles/SGD_Game.dir/GameObject.cpp.obj CMakeFiles/SGD_Game.dir/Tile.cpp.obj CMakeFiles/SGD_Game.dir/LevelDesign.cpp.obj CMakeFiles/SGD_Game.dir/UI.cpp.obj CMakeFiles/SGD_Game.dir/BoundingBox.cpp.obj CMakeFiles/SGD_Game.dir/FarBackground.cpp.obj CMakeFiles/SGD_Game.dir/NearBackground.cpp.obj CMakeFiles/SGD_Game.dir/Arrow.cpp.obj CMakeFiles/SGD_Game.dir/Coin.cpp.obj CMakeFiles/SGD_Game.dir/ForeGround.cpp.obj | LIBS/SDL2-2.30.1/lib/x64/SDL2main.lib LIBS/SDL2-2.30.1/lib/x64/SDL2.lib LIBS/SDL2-2.30.1/lib/x64/SDL2test.lib LIBS/SDL2_image/lib/SDL2_image.dll LIBS/openAL/openal-soft/build/Debug/OpenAL32.dll
   FLAGS = -g
-  LINK_LIBRARIES = E:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2main.lib  E:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2.lib  E:/C++_Libs/SDL2-2.30.1/lib/x64/SDL2test.lib  E:/C++_Libs/SDL2_image/lib/SDL2_image.dll  E:/C++_Libs/openAL/openal-soft/build/Debug/OpenAL32.dll  -lwinmm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  LINK_LIBRARIES = LIBS/SDL2-2.30.1/lib/x64/SDL2main.lib  LIBS/SDL2-2.30.1/lib/x64/SDL2.lib  LIBS/SDL2-2.30.1/lib/x64/SDL2test.lib  LIBS/SDL2_image/lib/SDL2_image.dll  LIBS/openAL/openal-soft/build/Debug/OpenAL32.dll  -lwinmm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\SGD_Game.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
