@@ -1,6 +1,4 @@
-//
-// Created by man91 on 14.05.2024.
-//
+
 
 #ifndef SGD_GAME_COIN_H
 #define SGD_GAME_COIN_H

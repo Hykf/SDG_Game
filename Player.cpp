@@ -45,6 +45,7 @@ void Player::Render(Window &renderer) {
     RunAnimation(renderer);
 
     //Update();
+
 }
 
 void Player::Movement(const Uint8 *state) {
@@ -62,6 +63,11 @@ void Player::Movement(const Uint8 *state) {
         velocityY += gravity;
         velocityY += maxSpeed * window->DeltaTime;
         velocityY += gravity * (1.0f - (jumpTime / jumpDuration));
+
+        if(hasTopCollision){
+            velocityY = 0;
+            positionY += sizeY/2;
+        }
     }
 
     Uint32 currentTime = SDL_GetTicks();
@@ -106,22 +112,21 @@ void Player::Movement(const Uint8 *state) {
 
 void Player::HandleMouseClick(SDL_Event &event) {
 
-    if (event.button.button == SDL_BUTTON_LEFT) {
-        int mouseX, mouseY;
-        SDL_GetMouseState(&mouseX, &mouseY);
+    if(alive){
+        if (event.button.button == SDL_BUTTON_LEFT) {
+            int mouseX, mouseY;
+            SDL_GetMouseState(&mouseX, &mouseY);
 
-        if (tile) {
-            delete tile;
-            tile = nullptr;
+            if (tile) {
+                delete tile;
+                tile = nullptr;
+            }
+
+            tile = new Tile(window,mouseX+positionX,mouseY,75,75);
+            tile->cc = 6;
+            PlaySound(TEXT("../sounds/tap.wav"), NULL, SND_FILENAME | SND_ASYNC);
+
         }
-
-        tile = new Tile(window,mouseX+positionX,mouseY,75,75);
-        tile->cc = 6;
-        PlaySound(TEXT("../sounds/tap.wav"), NULL, SND_FILENAME | SND_ASYNC);
-
-
-        /// ZAMIENIC NA CREATE GAMEOBJECT (JAKAS KLASA POCHODNA FLOOR LUB TILE) I tam w konstruktorze niech to
-        /// Doda sie do gameObjecs
     }
 }
 

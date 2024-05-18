@@ -1,6 +1,4 @@
-//
-// Created by man91 on 14.05.2024.
-//
+
 
 #include "ForeGround.h"
 #include "Window.h"

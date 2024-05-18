@@ -1,6 +1,3 @@
-//
-// Created by man91 on 13.05.2024.
-//
 
 #include "Arrow.h"
 #include "Window.h"

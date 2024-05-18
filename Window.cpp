@@ -7,6 +7,7 @@
 #include <random>
 #include "Coin.h"
 #include <windows.h>
+#include <cstdlib>
 
 
 Window::Window(int width, int height) {
@@ -19,24 +20,18 @@ Window::Window(int width, int height) {
     player = new Player(this);
     level = new Level(this);
 
-    ///
     InitMusic();
    std::cout<< GetLastError();
-   ///
 
-    level->levelTile = new Tile(this,500,350,200,100 );
+
+    level->levelTile = new Tile(this,(580),150,100,100 );
+    level->levelTile->cc = 6;
     BuildLevel();
 
 }
 
 Window::~Window() {
-
-    if(level) delete level;
-    alSourceStop(backgroundMusicSource);
-    SDL_DestroyRenderer( renderer );
-    SDL_DestroyWindow( window );
-    SDL_Quit();
-
+    DeInitial();
 }
 
 void Window::RenderAll() {
@@ -55,7 +50,7 @@ void Window::RenderAll() {
         Render(foreGround);
         Render(UI);
 
-        if(counter%(65-int(player->positionX/350))==0)
+        if(counter%(65-int(player->positionX/350))==0 && player->positionX > 500)
 
             for(int i = 0; i != (1+ int(player->positionX/5000)) ;i++){
                 level->SpawnArrow();
@@ -98,6 +93,12 @@ void Window::RenderAll() {
 
         counter++;
 
+        const Uint8* state = SDL_GetKeyboardState(NULL);
+        if (state[SDL_SCANCODE_R]) {
+            std::system("SGD_Game.exe");
+            std::exit(0);
+        }
+
     }
 
     SDL_RenderPresent(renderer);
@@ -122,7 +123,7 @@ void Window::BuildLevel() {
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.0, 1.0);
 
-    for (int i = 0; i != 10; i++) {
+    for (int i = 0; i != 15; i++) {
 
         level->farBackground = new FarBackground(this, -250 + (i * 1500), 0);
         level->nearBackground = new NearBackground(this, -250 + (i * 1000), 0);
@@ -233,13 +234,21 @@ void Window::InitMusic() {
 
 }
 
+void Window::DeInitial() {
+
+    if(level) delete level;
+    alSourceStop(backgroundMusicSource);
+    SDL_DestroyRenderer( renderer );
+    SDL_DestroyWindow( window );
+    SDL_Quit();
+}
+
 
 void Window::Level::SpawnArrow() {
 
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    //ZAKRESY
     int posX = window->player->positionX;
     int minX_X = posX - 550;
     int maxX_X = posX + 550;

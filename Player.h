@@ -15,10 +15,6 @@ public:
     Player(Window* _window);
     ~Player();
 
-    //
-    //Kiedys moze warto pomyslec nad
-    // stworzeniem struktur do trzymania zmiennych
-    //
 
     enum AnimStage{
         IDLE,
@@ -28,7 +24,7 @@ public:
     };
 
     float positionX = 100;
-    float positionY = 200;
+    float positionY = 100;
     float velocityX;
     float velocityY;
     const float jumpImpulse = 500.0f;

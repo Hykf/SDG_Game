@@ -66,6 +66,7 @@ public:
     void BuildLevel();
     bool loadWavFile(const char* filename, ALuint buffer);
     void InitMusic();
+    void DeInitial();
 };
 
 #endif // WINDOW_H

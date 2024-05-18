@@ -1,6 +1,4 @@
-//
-// Created by man91 on 12.05.2024.
-//
+
 
 #include "NearBackground.h"
 #include "Window.h"
